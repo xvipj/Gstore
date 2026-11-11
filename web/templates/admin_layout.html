@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{.Title}} · Gorras Admin</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body data-page="{{.Page}}">
+    <header class="site-header admin-header">
+        <div class="container-wide header-inner">
+            <a class="brand" href="/admin">GORRAS / ADMIN</a>
+            <nav class="site-nav admin-nav" aria-label="Navegación de administración">
+                <a href="/admin">Panel</a>
+                <a href="/admin/caps/new">Nueva gorra</a>
+                <a href="/" target="_blank" rel="noopener">Ver tienda</a>
+                <form class="inline-form" method="post" action="/admin/logout">
+                    <input type="hidden" name="csrf_token" value="{{.CSRFToken}}">
+                    <button class="button-link" type="submit">Salir ({{.AdminUsername}})</button>
+                </form>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container-wide main">
+        {{template "content" .}}
+    </main>
+
+    <footer class="site-footer">
+        <div class="container-wide">
+            <p>Gorras · Administración · {{.Year}}</p>
+        </div>
+    </footer>
+</body>
+</html>

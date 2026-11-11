@@ -1,0 +1,41 @@
+{{define "content"}}
+<div class="page-heading">
+    <div>
+        <h1>Carrito</h1>
+        <p class="muted">Los precios y el stock se validan nuevamente al pagar.</p>
+    </div>
+</div>
+
+<p class="notice" id="cart-loading">Cargando carrito…</p>
+
+<div id="cart-empty" hidden>
+    <p class="empty-state">Tu carrito está vacío.</p>
+    <p><a class="button" href="/">Ver gorras</a></p>
+</div>
+
+<div id="cart-content" hidden>
+    <table class="table cart-table">
+        <thead>
+            <tr>
+                <th>Producto</th>
+                <th>Precio</th>
+                <th>Cantidad</th>
+                <th>Subtotal</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody id="cart-items"></tbody>
+    </table>
+
+    <div class="cart-summary">
+        <div class="cart-total">
+            <span>Total</span>
+            <strong id="cart-total"></strong>
+        </div>
+        <button class="button button-primary" type="button" id="checkout-button">Pagar con Mercado Pago</button>
+        <p class="muted cart-note">Serás redirigido a Mercado Pago para completar el pago.</p>
+    </div>
+</div>
+
+<p class="form-error" id="cart-message" role="alert" hidden></p>
+{{end}}

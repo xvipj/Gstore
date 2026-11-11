@@ -1,0 +1,11 @@
+.env
+*.db
+*.db-shm
+*.db-wal
+bin/
+*.exe
+
+# Uploaded product photos are local data. Keep only the bundled seed images.
+web/static/uploads/*
+!web/static/uploads/seed-*.jpg
+!web/static/uploads/.gitkeep

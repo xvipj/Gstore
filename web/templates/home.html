@@ -1,0 +1,78 @@
+{{define "content"}}
+<div class="page-heading">
+    <div>
+        <h1>Gorras</h1>
+        <p class="muted">Selecciona un color y abre una gorra para ver el detalle.</p>
+    </div>
+</div>
+
+<nav class="filter-bar" aria-label="Filtrar por color">
+    <a class="filter-link {{if not .SelectedColor}}is-active{{end}}" href="/">Todos</a>
+    {{range .Colors}}
+        <a class="filter-link {{if eq . $.SelectedColor}}is-active{{end}}" href="/?color={{. | urlquery}}">{{.}}</a>
+    {{end}}
+</nav>
+
+{{if .Caps}}
+<section class="cap-grid" aria-label="Catálogo de gorras">
+    {{range .Caps}}
+    <article class="cap-card"
+        role="button"
+        tabindex="0"
+        aria-label="Ver detalle de {{.Name}}"
+        data-id="{{.ID}}"
+        data-name="{{.Name}}"
+        data-description="{{.Description}}"
+        data-color="{{.Color}}"
+        data-price="{{.Price}}"
+        data-price-display="{{formatCOP .Price}}"
+        data-stock="{{.Stock}}"
+        data-image="{{.ImagePath}}">
+        <div class="cap-image-wrap">
+            <img src="{{.ImagePath}}" alt="{{.Name}} en color {{.Color}}" loading="lazy">
+            {{if eq .Stock 0}}<span class="stock-badge">Agotada</span>{{end}}
+        </div>
+        <div class="cap-card-body">
+            <div class="cap-meta">
+                <span class="cap-color">{{.Color}}</span>
+                <span class="cap-price">{{formatCOP .Price}}</span>
+            </div>
+            <h2>{{.Name}}</h2>
+            <p class="cap-description">{{truncate .Description 105}}</p>
+            <p class="cap-stock">{{if gt .Stock 0}}Disponibles: {{.Stock}}{{else}}Agotada{{end}}</p>
+        </div>
+    </article>
+    {{end}}
+</section>
+{{else}}
+    <p class="empty-state">No hay gorras para este filtro.</p>
+{{end}}
+
+<div class="modal" id="cap-modal" hidden>
+    <div class="modal-backdrop" data-modal-close></div>
+    <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="modal-name">
+        <div class="modal-header">
+            <span class="modal-kicker">Detalle del producto</span>
+            <button class="button-link" type="button" id="modal-close" data-modal-close>Cerrar</button>
+        </div>
+        <div class="modal-body">
+            <div class="modal-image">
+                <img id="modal-image" src="" alt="">
+            </div>
+            <div class="modal-details">
+                <p class="modal-color" id="modal-color"></p>
+                <h2 id="modal-name"></h2>
+                <p class="modal-description" id="modal-description"></p>
+                <p class="modal-price" id="modal-price"></p>
+                <p class="modal-stock" id="modal-stock"></p>
+                <div class="quantity-control">
+                    <label for="modal-quantity">Cantidad</label>
+                    <input type="number" id="modal-quantity" min="1" value="1" inputmode="numeric">
+                </div>
+                <button class="button button-primary" type="button" id="modal-add">Agregar al carrito</button>
+                <p class="form-message" id="modal-message" role="status" aria-live="polite"></p>
+            </div>
+        </div>
+    </div>
+</div>
+{{end}}

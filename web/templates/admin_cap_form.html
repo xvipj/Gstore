@@ -1,0 +1,69 @@
+{{define "content"}}
+<div class="page-heading admin-page-heading">
+    <div>
+        <h1>{{if .IsEdit}}Editar gorra{{else}}Nueva gorra{{end}}</h1>
+        <p class="muted">Los precios se guardan como pesos colombianos enteros.</p>
+    </div>
+    <a class="button" href="/admin">Volver al panel</a>
+</div>
+
+{{if .Error}}<p class="form-error">{{.Error}}</p>{{end}}
+
+<form class="stack-form admin-form" method="post" action="{{.Action}}" enctype="multipart/form-data">
+    <input type="hidden" name="csrf_token" value="{{.CSRFToken}}">
+
+    <div class="form-grid">
+        <label class="full-width">
+            Nombre *
+            <input type="text" name="name" value="{{.Form.Name}}" required>
+            {{with index .FieldErrors "name"}}<span class="field-error">{{.}}</span>{{end}}
+        </label>
+
+        <label>
+            Color *
+            <input type="text" name="color" value="{{.Form.Color}}" required>
+            {{with index .FieldErrors "color"}}<span class="field-error">{{.}}</span>{{end}}
+        </label>
+
+        <label>
+            Precio (COP) *
+            <input type="number" name="price" min="1" step="1" value="{{.Form.Price}}" required>
+            {{with index .FieldErrors "price"}}<span class="field-error">{{.}}</span>{{end}}
+        </label>
+
+        <label>
+            Stock *
+            <input type="number" name="stock" min="0" step="1" value="{{.Form.Stock}}" required>
+            {{with index .FieldErrors "stock"}}<span class="field-error">{{.}}</span>{{end}}
+        </label>
+
+        <label>
+            Estado
+            <select name="published">
+                <option value="true" {{if .Form.Published}}selected{{end}}>Publicada</option>
+                <option value="false" {{if not .Form.Published}}selected{{end}}>Oculta</option>
+            </select>
+        </label>
+
+        <label class="full-width">
+            Descripción
+            <textarea name="description" rows="6">{{.Form.Description}}</textarea>
+        </label>
+
+        <div class="full-width">
+            <label for="image">Foto {{if not .IsEdit}}*{{end}}</label>
+            <input id="image" type="file" name="image" accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp" {{if not .IsEdit}}required{{end}}>
+            <p class="form-hint">JPG, PNG o WebP. Tamaño máximo: 2 MB.</p>
+            {{with index .FieldErrors "image"}}<span class="field-error">{{.}}</span>{{end}}
+            {{if .Form.ImagePath}}
+            <div class="current-image">
+                <img class="thumb" src="{{.Form.ImagePath}}" alt="Foto actual de {{.Form.Name}}">
+                <span class="muted">Foto actual. Se conserva si no seleccionas otra.</span>
+            </div>
+            {{end}}
+        </div>
+    </div>
+
+    <button class="button button-primary" type="submit">Guardar</button>
+</form>
+{{end}}

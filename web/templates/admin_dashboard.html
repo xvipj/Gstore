@@ -1,0 +1,133 @@
+{{define "content"}}
+<div class="page-heading admin-page-heading">
+    <div>
+        <h1>Panel</h1>
+        <p class="muted">Resumen de la tienda y administración del catálogo.</p>
+    </div>
+    <a class="button button-primary" href="/admin/caps/new">Nueva gorra</a>
+</div>
+
+<section class="admin-section">
+    <h2>Resumen</h2>
+    <dl class="summary-grid">
+        <div>
+            <dt>Gorras publicadas</dt>
+            <dd>{{.Summary.PublishedCaps}}</dd>
+        </div>
+        <div>
+            <dt>Unidades en stock</dt>
+            <dd>{{.Summary.StockUnits}}</dd>
+        </div>
+        <div>
+            <dt>Unidades vendidas</dt>
+            <dd>{{.Summary.SoldUnits}}</dd>
+        </div>
+        <div>
+            <dt>Ingresos (órdenes pagadas)</dt>
+            <dd>{{formatCOP .Summary.Revenue}}</dd>
+        </div>
+        <div>
+            <dt>Órdenes pagadas</dt>
+            <dd>{{.Summary.PaidOrders}}</dd>
+        </div>
+    </dl>
+</section>
+
+<section class="admin-section">
+    <h2>Stock y ventas por color</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Color</th>
+                <th>Stock</th>
+                <th>Vendidas</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{range .Summary.Colors}}
+            <tr>
+                <td>{{.Color}}</td>
+                <td>{{.Stock}}</td>
+                <td>{{.Sold}}</td>
+            </tr>
+            {{else}}
+            <tr><td colspan="3">Sin datos.</td></tr>
+            {{end}}
+        </tbody>
+    </table>
+</section>
+
+<section class="admin-section">
+    <h2>Gorras</h2>
+    <table class="table admin-table">
+        <thead>
+            <tr>
+                <th>Foto</th>
+                <th>Nombre</th>
+                <th>Color</th>
+                <th>Precio</th>
+                <th>Stock</th>
+                <th>Vendidas</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{range .Caps}}
+            <tr>
+                <td><img class="thumb" src="{{.ImagePath}}" alt="{{.Name}}"></td>
+                <td>{{.Name}}</td>
+                <td>{{.Color}}</td>
+                <td>{{formatCOP .Price}}</td>
+                <td>{{.Stock}}</td>
+                <td>{{.Sold}}</td>
+                <td>{{if .Published}}Publicada{{else}}Oculta{{end}}</td>
+                <td class="actions-cell">
+                    <a class="button-link" href="/admin/caps/{{.ID}}/edit">Editar</a>
+                    <form class="inline-form" method="post" action="/admin/caps/{{.ID}}/delete">
+                        <input type="hidden" name="csrf_token" value="{{$.CSRFToken}}">
+                        <button class="button-link danger-link" type="submit">Eliminar</button>
+                    </form>
+                </td>
+            </tr>
+            {{else}}
+            <tr><td colspan="8">No hay gorras registradas.</td></tr>
+            {{end}}
+        </tbody>
+    </table>
+</section>
+
+<section class="admin-section">
+    <h2>Órdenes</h2>
+    <table class="table orders-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Fecha</th>
+                <th>Total</th>
+                <th>Estado</th>
+                <th>Ítems comprados</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{range .Orders}}
+            <tr>
+                <td>#{{.ID}}</td>
+                <td>{{formatDate .CreatedAt}}</td>
+                <td>{{formatCOP .Total}}</td>
+                <td>{{statusLabel .Status}}</td>
+                <td>
+                    <ul class="order-items">
+                        {{range .Items}}
+                        <li>{{.Quantity}} × {{.Name}} — {{formatCOP .UnitPrice}}</li>
+                        {{end}}
+                    </ul>
+                </td>
+            </tr>
+            {{else}}
+            <tr><td colspan="5">Todavía no hay órdenes.</td></tr>
+            {{end}}
+        </tbody>
+    </table>
+</section>
+{{end}}
