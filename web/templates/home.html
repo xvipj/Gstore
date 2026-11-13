@@ -53,7 +53,7 @@
     <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="modal-name">
         <div class="modal-header">
             <span class="modal-kicker">Detalle del producto</span>
-            <button class="button-link" type="button" id="modal-close" data-modal-close>Cerrar</button>
+            <button class="button-link icon-button" type="button" id="modal-close" data-modal-close aria-label="Cerrar" title="Cerrar">{{template "icon-close"}}</button>
         </div>
         <div class="modal-body">
             <div class="modal-image">
@@ -69,7 +69,7 @@
                     <label for="modal-quantity">Cantidad</label>
                     <input type="number" id="modal-quantity" min="1" value="1" inputmode="numeric">
                 </div>
-                <button class="button button-primary" type="button" id="modal-add">Agregar al carrito</button>
+                <button class="button button-primary" type="button" id="modal-add">{{template "icon-plus-circle"}}<span id="modal-add-label">Agregar al carrito</span></button>
                 <p class="form-message" id="modal-message" role="status" aria-live="polite"></p>
             </div>
         </div>

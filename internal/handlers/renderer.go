@@ -27,6 +27,7 @@ func NewRenderer(templatesDir string) *Renderer {
 func (r *Renderer) Render(c *gin.Context, status int, layoutFile, pageFile string, data any) error {
 	layoutPath := filepath.Join(r.templatesDir, layoutFile)
 	pagePath := filepath.Join(r.templatesDir, pageFile)
+	iconsPath := filepath.Join(r.templatesDir, "icons.html")
 
 	tmpl, err := template.New(filepath.Base(layoutPath)).
 		Funcs(template.FuncMap{
@@ -35,7 +36,7 @@ func (r *Renderer) Render(c *gin.Context, status int, layoutFile, pageFile strin
 			"statusLabel": statusLabel,
 			"truncate":    truncate,
 		}).
-		ParseFiles(layoutPath, pagePath)
+		ParseFiles(layoutPath, pagePath, iconsPath)
 	if err != nil {
 		return fmt.Errorf("parse templates: %w", err)
 	}

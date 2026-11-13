@@ -9,8 +9,8 @@
 <p class="notice" id="cart-loading">Cargando carrito…</p>
 
 <div id="cart-empty" hidden>
-    <p class="empty-state">Tu carrito está vacío.</p>
-    <p><a class="button" href="/">Ver gorras</a></p>
+    <p class="empty-state"><span class="empty-icon">{{template "icon-cart"}}</span>Tu carrito está vacío.</p>
+    <p><a class="button" href="/">{{template "icon-arrow-left"}}<span>Ver gorras</span></a></p>
 </div>
 
 <div id="cart-content" hidden>
@@ -32,7 +32,7 @@
             <span>Total</span>
             <strong id="cart-total"></strong>
         </div>
-        <button class="button button-primary" type="button" id="checkout-button">Pagar con Mercado Pago</button>
+        <button class="button button-primary" type="button" id="checkout-button">{{template "icon-lock"}}<span id="checkout-label">Pagar con Mercado Pago</span></button>
         <p class="muted cart-note">Serás redirigido a Mercado Pago para completar el pago.</p>
     </div>
 </div>

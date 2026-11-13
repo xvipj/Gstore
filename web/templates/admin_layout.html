@@ -11,12 +11,12 @@
         <div class="container-wide header-inner">
             <a class="brand" href="/admin">GORRAS / ADMIN</a>
             <nav class="site-nav admin-nav" aria-label="Navegación de administración">
-                <a href="/admin">Panel</a>
-                <a href="/admin/caps/new">Nueva gorra</a>
-                <a href="/" target="_blank" rel="noopener">Ver tienda</a>
+                <a class="nav-link" href="/admin">{{template "icon-grid"}}<span>Panel</span></a>
+                <a class="nav-link" href="/admin/caps/new">{{template "icon-plus"}}<span>Nueva gorra</span></a>
+                <a class="nav-link" href="/" target="_blank" rel="noopener">{{template "icon-external"}}<span>Ver tienda</span></a>
                 <form class="inline-form" method="post" action="/admin/logout">
                     <input type="hidden" name="csrf_token" value="{{.CSRFToken}}">
-                    <button class="button-link" type="submit">Salir ({{.AdminUsername}})</button>
+                    <button class="button-link nav-link" type="submit">{{template "icon-logout"}}<span>Salir ({{.AdminUsername}})</span></button>
                 </form>
             </nav>
         </div>

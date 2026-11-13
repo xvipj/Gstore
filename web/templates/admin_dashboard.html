@@ -4,7 +4,7 @@
         <h1>Panel</h1>
         <p class="muted">Resumen de la tienda y administración del catálogo.</p>
     </div>
-    <a class="button button-primary" href="/admin/caps/new">Nueva gorra</a>
+    <a class="button button-primary" href="/admin/caps/new">{{template "icon-plus"}}<span>Nueva gorra</span></a>
 </div>
 
 <section class="admin-section">
@@ -83,10 +83,10 @@
                 <td>{{.Sold}}</td>
                 <td>{{if .Published}}Publicada{{else}}Oculta{{end}}</td>
                 <td class="actions-cell">
-                    <a class="button-link" href="/admin/caps/{{.ID}}/edit">Editar</a>
+                    <a class="button-link icon-link" href="/admin/caps/{{.ID}}/edit" aria-label="Editar {{.Name}}" title="Editar">{{template "icon-edit"}}</a>
                     <form class="inline-form" method="post" action="/admin/caps/{{.ID}}/delete">
                         <input type="hidden" name="csrf_token" value="{{$.CSRFToken}}">
-                        <button class="button-link danger-link" type="submit">Eliminar</button>
+                        <button class="button-link icon-link danger-link" type="submit" aria-label="Eliminar {{.Name}}" title="Eliminar">{{template "icon-trash"}}</button>
                     </form>
                 </td>
             </tr>

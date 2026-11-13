@@ -15,9 +15,9 @@
             Contraseña
             <input type="password" name="password" autocomplete="current-password" required>
         </label>
-        <button class="button button-primary" type="submit">Ingresar</button>
+        <button class="button button-primary" type="submit">{{template "icon-login"}}<span>Ingresar</span></button>
     </form>
 
-    <p class="login-back"><a href="/">Volver a la tienda</a></p>
+    <p class="login-back"><a class="nav-link" href="/">{{template "icon-arrow-left"}}<span>Volver a la tienda</span></a></p>
 </div>
 {{end}}

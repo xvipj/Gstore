@@ -1,7 +1,8 @@
 {{define "content"}}
 <section class="result-panel">
+    <div class="result-icon">{{template "icon-alert"}}</div>
     <p class="error-code">{{.Code}}</p>
     <h1>{{.Message}}</h1>
-    <p><a class="button" href="/">Volver a la tienda</a></p>
+    <p><a class="button" href="/">{{template "icon-arrow-left"}}<span>Volver a la tienda</span></a></p>
 </section>
 {{end}}

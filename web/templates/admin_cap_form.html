@@ -4,7 +4,7 @@
         <h1>{{if .IsEdit}}Editar gorra{{else}}Nueva gorra{{end}}</h1>
         <p class="muted">Los precios se guardan como pesos colombianos enteros.</p>
     </div>
-    <a class="button" href="/admin">Volver al panel</a>
+    <a class="button" href="/admin">{{template "icon-arrow-left"}}<span>Volver al panel</span></a>
 </div>
 
 {{if .Error}}<p class="form-error">{{.Error}}</p>{{end}}
@@ -64,6 +64,6 @@
         </div>
     </div>
 
-    <button class="button button-primary" type="submit">Guardar</button>
+    <button class="button button-primary" type="submit">{{template "icon-check"}}<span>Guardar</span></button>
 </form>
 {{end}}

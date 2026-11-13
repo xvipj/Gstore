@@ -1,7 +1,10 @@
 {{define "content"}}
 <section class="result-panel">
+    <div class="result-icon">
+        {{if eq .Page "payment-success"}}{{template "icon-check-circle"}}{{else if eq .Page "payment-pending"}}{{template "icon-clock"}}{{else}}{{template "icon-x-circle"}}{{end}}
+    </div>
     <h1>{{.Heading}}</h1>
     <p>{{.Message}}</p>
-    <p><a class="button" href="/">Volver a la tienda</a></p>
+    <p><a class="button" href="/">{{template "icon-arrow-left"}}<span>Volver a la tienda</span></a></p>
 </section>
 {{end}}
